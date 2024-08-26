@@ -7,15 +7,20 @@ Automatic Backup: Creates a timestamped backup directory and moves all existing 
 Repository Update: Replaces the CentOS-Linux-BaseOS.repo file with an updated version pointing to the CentOS Vault URLs.
 Easy to Use: Simply run the script with sudo and let it handle everything.
 Script Details 📝
-bash
-Copy code
+
 #!/bin/bash
 
-BACKUP_DIR="/etc/yum.repos.d/backup_$(date +%F_%T)"
+# Create a backup directory in /etc/yum.repos.d/
+BACKUP_DIR="/etc/yum.repos.d/backup-$(date +%Y%m%d%H%M%S)"
 mkdir -p "$BACKUP_DIR"
-mv /etc/yum.repos.d/*.repo "$BACKUP_DIR"
+echo "Backup directory created successfully: $BACKUP_DIR"
 
-cat <<EOL > /etc/yum.repos.d/CentOS-Linux-BaseOS.repo
+# Move all files to the backup directory
+mv /etc/yum.repos.d/* "$BACKUP_DIR/"
+echo "Files moved to backup directory successfully"
+
+# Create a new CentOS-Linux-BaseOs.repo file with the updated contents
+cat <<EOF > /etc/yum.repos.d/CentOS-Linux-BaseOs.repo
 [BaseOS]
 name=CentOS Linux \$releasever - BaseOS
 baseurl=http://vault.centos.org/8.5.2111/BaseOS/\$basearch/os/
@@ -36,26 +41,26 @@ baseurl=http://vault.centos.org/8.5.2111/Extras/\$basearch/os/
 gpgcheck=1
 enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
-EOL
-
+EOF
+echo "CentOS-Linux-BaseOs.repo file updated successfully"
 echo "Backup created in: $BACKUP_DIR"
 echo "CentOS-Linux-BaseOS.repo updated successfully!"
+
+
+
 How to Use 🛠️
 Clone the Repository:
 
-bash
-Copy code
+
 git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
 Make the Script Executable:
 
-bash
-Copy code
+
 chmod +x update_repos.sh
 Run the Script with sudo:
 
-bash
-Copy code
+
 sudo ./update_repos.sh
 Prerequisites 📋
 CentOS 8 installed on your system.
