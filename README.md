@@ -49,19 +49,18 @@ echo "CentOS-Linux-BaseOS.repo updated successfully!"
 
 
 How to Use 🛠️
+
 Clone the Repository:
+git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/KhuramMurad/CentOS-EOL-Repo-fixes.git)
 
-
-git clone https://github.com/yourusername/your-repo-name.git
 cd your-repo-name
+
 Make the Script Executable:
-
-
 chmod +x update_repos.sh
+
 Run the Script with sudo:
-
-
 sudo ./update_repos.sh
+
 Prerequisites 📋
 CentOS 8 installed on your system.
 Root privileges (use sudo to execute the script).
@@ -69,4 +68,4 @@ Contributing 🤝
 Feel free to contribute to this project by submitting issues or pull requests. All contributions are welcome!
 
 License 📄
-This project is licensed under the MIT License. See the LICENSE file for more details.
+This project is licensed under the GPL License.
